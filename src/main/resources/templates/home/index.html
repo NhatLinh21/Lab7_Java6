@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Beautiful Page</title>
+    <style>
+        /* Cài đặt chung cho body */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Định dạng cho container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Phần định dạng cho navbar */
+        nav {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Định dạng cho các liên kết bên trong navbar */
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        /* Hiệu ứng khi di chuột qua các liên kết */
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        /* Định dạng cho phần tiêu đề */
+        h2 {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 2em;
+            color: #007bff;
+        }
+
+        /* Định dạng cho dòng kẻ ngang */
+        hr {
+            width: 80%;
+            margin: 20px auto;
+            border: none;
+            border-top: 2px solid #eee;
+        }
+
+        /* Định dạng cho phần nội dung chính */
+        main {
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        /* Định dạng cho phần thông tin phụ */
+        .info {
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Định dạng cho footer (nếu có) */
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav th:replace="~{/home/_menu :: nav}">
+        <!-- Có thể thêm các mục điều hướng ở đây -->
+        <a href="/home">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+    </nav>
+
+    <!-- Container -->
+    <div class="container">
+        <!-- Nội dung chính -->
+        <main>
+            <hr>
+            <h2 th:text="${message}">Welcome to Our Website</h2>
+            <hr>
+
+            <!-- Thay thế phần thông tin -->
+            <div class="info" th:replace="~{/home/_info :: main}">
+                <!-- Nội dung thông tin được tải động -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer (nếu cần) -->
+    <footer>
+        &copy; 2024 FPT Polytechnic. All rights reserved.
+    </footer>
+</body>
+</html>

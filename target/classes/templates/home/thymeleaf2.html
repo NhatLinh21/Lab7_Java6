@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Authorization Page</title>
+    <style>
+        /* Basic Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 60px; /* To accommodate the fixed navbar */
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: #007bff;
+            padding: 10px 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            z-index: 1000; /* Ensure the navbar stays above other elements */
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        h3 {
+            margin: 20px 0;
+            color: red;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        ul li {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        hr {
+            width: 80%;
+            margin: 20px auto;
+            border: none;
+            border-top: 2px solid #eee;
+        }
+         footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            width: 100%;
+            position: absolute;
+            bottom: 500px;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav th:replace="~{/home/_menu :: nav}"></nav>
+
+    <!-- Main Content -->
+    <main>
+        <hr>
+        <h2 th:text="${message}">Welcome Message</h2>
+        <hr>
+        <h3 sec:authorize="!isAuthenticated()">Chưa đăng nhập</h3>
+        <ul sec:authorize="isAuthenticated()">
+            <li sec:authorize="hasRole('ADMIN')">ADMIN</li>
+            <li sec:authorize="hasAnyRole('ADMIN', 'USER')">ADMIN or USER</li>
+            <li sec:authorize="hasRole('GUEST')">GUEST</li>
+        </ul>
+        <hr>
+    </main>
+     <footer>
+        &copy; 2024 FPT Polytechnic. All rights reserved.
+    </footer>
+</body>
+</html>
